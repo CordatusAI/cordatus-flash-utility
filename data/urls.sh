@@ -39,6 +39,8 @@ readonly ALL_5_1_3=("https://developer.nvidia.com/downloads/embedded/l4t/r35_rel
 "http://download.comarge.com/omniwise/orin-nx/ONX101_5_1_3.zip")
 readonly ALL_5_1_4=("https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.0/release/jetson_linux_r35.6.0_aarch64.tbz2" \
 "https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.0/release/tegra_linux_sample-root-filesystem_r35.6.0_aarch64.tbz2")
+readonly ALL_5_1_5=("https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.2/release/jetson_linux_r35.6.2_aarch64.tbz2" \
+"https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v6.2/tegra_linux_sample-root-filesystem_r35.6.2_aarch64.tbz2")
 readonly ALL_6_0_DP=("https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/jetson_linux_r36.2.0_aarch64.tbz2" \
 "https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v2.0/release/tegra_linux_sample-root-filesystem_r36.2.0_aarch64.tbz2")
 readonly ALL_6_0=("https://developer.nvidia.com/downloads/embedded/l4t/r36_release_v3.0/release/jetson_linux_r36.3.0_aarch64.tbz2" \
