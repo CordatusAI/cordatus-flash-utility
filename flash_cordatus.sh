@@ -347,7 +347,7 @@ elif [[ "${storage_device}" == 'NVMe SSD' ]]; then
 
     j_version=$(echo "$jetpack_version" | cut -d " " -f 1)
     
-    if [[ "${jetpack_version}" == '6.0 - L4T 36.3' ]] || [[ "${jetpack_version}" == '6.1 - L4T 36.4.0' ]] || [[ "${jetpack_version}" == '6.2 - L4T 36.4.3' ]]; then
+    if [[ "${jetpack_version}" == '6.0 - L4T 36.3' ]] || [[ "${jetpack_version}" == '6.1 - L4T 36.4.0' ]] || [[ "${jetpack_version}" == '6.2 - L4T 36.4.3' ]] || [[ "${jetpack_version}" == '6.2.1 - L4T 36.4.4' ]]; then
       cfg_folder_name='generic'
     else
       cfg_folder_name='t186ref'
@@ -356,7 +356,9 @@ elif [[ "${storage_device}" == 'NVMe SSD' ]]; then
     if [[ "${product}" == 'D315' ]] && [[ "${jetpack_version}" == '5.0.2 - L4T 35.1' ]] ; then
       cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_AGX_ORIN_TARGETS/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }  
     elif [[ "${jetpack_version}" == '6.2 - L4T 36.4.3' ]] ; then
-      cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }     
+      cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }
+    elif [[ "${jetpack_version}" == '6.2.1 - L4T 36.4.4' ]] ; then
+      cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }   
     else
       cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }      
     fi
@@ -383,7 +385,7 @@ elif [[ "${storage_device}" == 'NVMe SSD' ]]; then
 
     elif [[ "${product}" == 'D315' ]]; then
       
-      if [[ "${jetpack_version}" == '6.1 - L4T 36.4.0' ]] || [[ "${jetpack_version}" == '6.2 - L4T 36.4.3' ]]; then
+      if [[ "${jetpack_version}" == '6.1 - L4T 36.4.0' ]] || [[ "${jetpack_version}" == '6.2 - L4T 36.4.3' ]] || [[ "${jetpack_version}" == '6.2.1 - L4T 36.4.4' ]]; then
         cam_selection="0"
       else
         cam_selection="8"
@@ -395,6 +397,25 @@ elif [[ "${storage_device}" == 'NVMe SSD' ]]; then
         sudo chmod +x ./addition_setup.sh
         sudo ./addition_setup.sh "$cam_selection"
         cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }
+      elif [[ "${jetpack_version}" == '6.2.1 - L4T 36.4.4' ]]; then
+        cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }
+        
+        cd "$HOME/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra/rootfs/usr/lib/modules/5.15.148-tegra/updates/drivers/media/i2c/" > /dev/null || exit 1
+    
+        sudo mv max9295.ko.bak max9295.ko 2>/dev/null 
+        sudo mv max9296.ko.bak max9296.ko 2>/dev/null 
+        sudo mv max96712.ko.bak max96712.ko 2>/dev/null 
+        sudo mv nv_imx390.ko.bak nv_imx390.ko 2>/dev/null 
+
+        echo -e "CARRIER_BOARD_NAME=D315\nMODE_TYPE=" | sudo tee "${THIS_DIR}/rootfs/etc/avt_carrier_board.conf" > /dev/null
+
+        cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra/settings/D315 || { err "Failed to change directory"; exit 1; }
+        sudo rsync -avc --exclude=".*" "./patch/" ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra/
+
+        sudo chmod +x ./addition_setup.sh
+        sudo ./addition_setup.sh "$cam_selection"
+        cd ~/openzeka/JetPack_"${j_version}"_Linux_JETSON_desktop/Linux_for_Tegra || { err "Failed to change directory"; exit 1; }
+
       else
         sudo ./setup.sh "$cam_selection"
       fi

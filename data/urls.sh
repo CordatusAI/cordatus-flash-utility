@@ -64,5 +64,6 @@ readonly D315_5_1_3=("https://download.comarge.com/avermedia/agx-orin/D315AO-R2.
 readonly D315_6_0=("https://download.comarge.com/avermedia/agx-orin/D315AO-R3.1.0.6.0.0.tar.gz")
 readonly D315_6_1=("https://download.comarge.com/avermedia/agx-orin/D315AO-36.4.0.6.1.tar.gz")
 readonly D315_6_2=("https://download.comarge.com/avermedia/agx-orin/D315AO-36.4.3.6.2.tar.gz")
+readonly D315_6_2_1=("https://download.comarge.com/avermedia/agx-orin/AVERMEDIA_JETPACK-R1.2.3.6.2.1_desktop.tar.gz")
 readonly J401_6_1=("https://download.comarge.com/seeed/orin-nx-16/J401ONX16-6.1.tar.gz")
 
